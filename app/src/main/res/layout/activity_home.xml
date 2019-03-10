@@ -1,9 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
-
-</android.support.constraint.ConstraintLayout>
+    tools:context=".HomeActivity"
+    android:background="@color/colorPrimary"
+    android:padding="10dp"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        >
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/total_elections"
+        />
+        <TextView
+            android:id="@+id/total_election_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Total Elections"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/total_election_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/total_election_label"
+            android:text="0"
+            android:textSize="60sp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        >
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/pending_elections"
+            />
+        <TextView
+            android:id="@+id/pending_election_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Pending Elections"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/pending_election_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/pending_election_label"
+            android:text="0"
+            android:textSize="60sp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        >
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/active_elections"
+            />
+        <TextView
+            android:id="@+id/active_election_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Active Elections"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/active_election_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/active_election_label"
+            android:text="0"
+            android:textSize="60sp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        >
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/finished_elections"
+            />
+        <TextView
+            android:id="@+id/finished_election_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Finished Elections"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/finished_election_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/finished_election_label"
+            android:text="0"
+            android:textSize="60sp"
+            />
+    </RelativeLayout>
+</LinearLayout>

@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#029159</color>
     <color name="colorAccent">#FFD402</color>
     <color name="white">#FFFFFF</color>
+    <color name="total_elections">#FF9202</color>
+    <color name="pending_elections">#11B35A</color>
+    <color name="active_elections">#F70C22</color>
+    <color name="finished_elections">#02B5C8</color>
 </resources>
