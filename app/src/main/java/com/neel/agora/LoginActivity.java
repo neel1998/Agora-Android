@@ -93,9 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     result = response.body().string();
                     JSONObject jsonObject = new JSONObject(result);
+                    UserHelper.getUserHelper(jsonObject, password);
                     Toast.makeText(LoginActivity.this, "Log in Successful", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    intent.putExtra("token", jsonObject.getJSONObject("token").toString());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } catch (IOException e) {
