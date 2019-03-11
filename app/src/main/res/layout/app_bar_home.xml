@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
@@ -30,5 +31,10 @@
         android:layout_width="match_parent"
         />
     </ScrollView>
-
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/home_prog"
+        />
 </RelativeLayout>

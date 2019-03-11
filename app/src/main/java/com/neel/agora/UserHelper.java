@@ -52,4 +52,8 @@ public class UserHelper {
     public String getToken() {
         return mToken;
     }
+
+    public void updateToken(String token){
+        mToken = token;
+    }
 }
