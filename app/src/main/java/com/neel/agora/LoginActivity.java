@@ -88,12 +88,12 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Response response) {
             loginButton.setVisibility(View.VISIBLE);
             loginProgressBar.setVisibility(View.INVISIBLE);
-            if (response.body() != null){
+            if (response != null && response.body() != null){
                 String result = "";
                 try {
                     result = response.body().string();
                     JSONObject jsonObject = new JSONObject(result);
-                    Toast.makeText(LoginActivity.this, "Log in Succesfull", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Log in Successful", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.putExtra("token", jsonObject.getJSONObject("token").toString());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
