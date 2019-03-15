@@ -33,6 +33,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (Network.areCredentialsStored(this)){
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+
         loginProgressBar = findViewById(R.id.login_prog);
         loginButton = findViewById(R.id.login_btn);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setVisibility(View.INVISIBLE);
                 loginProgressBar.setVisibility(View.VISIBLE);
 
+                CredentialStorage credentialStorage = CredentialStorage.getInstance(LoginActivity.this);
+                credentialStorage.setCredentials(username, password);
                 new LoginTask().execute();
             }
         });
@@ -60,54 +68,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private class LoginTask extends AsyncTask<Void, Void, Response>{
+    private class LoginTask extends AsyncTask<Void, Void, Boolean>{
         @Override
-        protected Response doInBackground(Void... voids) {
-            Response result = null;
-            try{
-                OkHttpClient client = new OkHttpClient();
-                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                URL url = new URL("https://agora-rest-api.herokuapp.com/api/v1/auth/login");
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("identifier", username);
-                jsonObject.put("password", password);
-
-                RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-                Request request = new Request.Builder()
-                                  .url(url)
-                                  .post(body)
-                                  .build();
-                result = client.newCall(request).execute();
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return result;
+        protected Boolean doInBackground(Void... voids) {
+            return Network.login(LoginActivity.this);
         }
 
         @Override
-        protected void onPostExecute(Response response) {
+        protected void onPostExecute(Boolean result){
             loginButton.setVisibility(View.VISIBLE);
             loginProgressBar.setVisibility(View.INVISIBLE);
-            if (response != null && response.body() != null){
-                String result = "";
-                try {
-                    result = response.body().string();
-                    JSONObject jsonObject = new JSONObject(result);
-                    UserHelper.getUserHelper(jsonObject, password);
-                    Toast.makeText(LoginActivity.this, "Log in Successful", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    if (result.length() > 0) {
-                        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        Toast.makeText(LoginActivity.this, "Log in Failed", Toast.LENGTH_SHORT).show();
-                    }
-                }
+            if (result){
+                Toast.makeText(LoginActivity.this, "Log in Successful", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
             else{
                 Toast.makeText(LoginActivity.this, "Log in Failed", Toast.LENGTH_SHORT).show();

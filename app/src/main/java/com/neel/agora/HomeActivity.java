@@ -64,38 +64,25 @@ public class HomeActivity extends AppCompatActivity
         new ElectionDataTask().execute();
     }
 
-    private class ElectionDataTask extends AsyncTask<Void, Void, Response>{
+    private class ElectionDataTask extends AsyncTask<Void, Void, NetworkResponse>{
         @Override
-        protected Response doInBackground(Void... voids) {
-            Response result = null;
-            try{
-                OkHttpClient client = new OkHttpClient();
-                URL url = new URL("https://agora-rest-api.herokuapp.com/api/v1/election");
-
-                Request request = new Request.Builder()
-                                .url(url)
-                                .addHeader("X-Auth-Token", mUserHelper.getToken())
-                                .build();
-                result = client.newCall(request).execute();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            return  result;
+        protected NetworkResponse doInBackground(Void... voids) {
+            return Network.request("https://agora-rest-api.herokuapp.com/api/v1/election", null, HomeActivity.this, false);
         }
 
         @Override
-        protected void onPostExecute(Response response) {
+        protected void onPostExecute(NetworkResponse response) {
             homeProgressBar.setVisibility(View.GONE);
-            if (response != null && response.body() != null){
+            if (response != null){
                 try {
-                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    JSONObject jsonObject = new JSONObject(response.getResponseString());
                     if (jsonObject.has("elections")) {
                         electionDataArray = jsonObject.getJSONArray("elections");
                         totalElectionValue.setText(String.valueOf(electionDataArray.length()));
                     }else {
                         Toast.makeText(HomeActivity.this, "Error fetching election data", Toast.LENGTH_SHORT).show();
                     }
-                } catch (JSONException | IOException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }else{
@@ -127,16 +114,9 @@ public class HomeActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id){
-            case R.id.nav_elections:
-                break;
-            case R.id.nav_profile:
-                break;
-            case R.id.nav_about:
-                Intent aboutIntent = new Intent(HomeActivity.this, AboutActivity.class);
-                startActivity(aboutIntent);
-                break;
             case R.id.action_logout:
                 UserHelper.makeNull();
+                CredentialStorage.getInstance(this).removeCredentials();
                 Intent logoutIntent = new Intent(HomeActivity.this, LoginActivity.class);
                 logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(logoutIntent);
@@ -149,7 +129,17 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        switch (id){
+            case R.id.nav_elections:
+                break;
+            case R.id.nav_profile:
+                break;
+            case R.id.nav_about:
+                Log.d("navbar", "about selected");
+                Intent aboutIntent = new Intent(HomeActivity.this, AboutActivity.class);
+                startActivity(aboutIntent);
+                break;
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
