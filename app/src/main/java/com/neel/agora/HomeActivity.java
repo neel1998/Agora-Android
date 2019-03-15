@@ -19,6 +19,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.neel.agora.Election.ElectionData;
+import com.neel.agora.Election.ElectionDataAsyncTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +39,6 @@ public class HomeActivity extends AppCompatActivity
     ProgressBar homeProgressBar;
     TextView totalElectionValue, pendingElectionValue, activeElectionValue, finishedElectionValue;
     UserHelper mUserHelper;
-    JSONArray electionDataArray = new JSONArray();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,35 +63,24 @@ public class HomeActivity extends AppCompatActivity
 
         mUserHelper = UserHelper.getUserHelper();
 
-        new ElectionDataTask().execute();
-    }
+        ElectionDataAsyncTask.getElectionData(new AsyncCallback<int[]>() {
+            @Override
+            public void success(int[] ints) {
+                homeProgressBar.setVisibility(View.GONE);
+                totalElectionValue.setText(String.valueOf(ints[0]));
+                activeElectionValue.setText(String.valueOf(ints[1]));
+                pendingElectionValue.setText(String.valueOf(ints[2]));
+                finishedElectionValue.setText(String.valueOf(ints[3]));
 
-    private class ElectionDataTask extends AsyncTask<Void, Void, NetworkResponse>{
-        @Override
-        protected NetworkResponse doInBackground(Void... voids) {
-            return Network.request("https://agora-rest-api.herokuapp.com/api/v1/election", null, HomeActivity.this, false);
-        }
-
-        @Override
-        protected void onPostExecute(NetworkResponse response) {
-            homeProgressBar.setVisibility(View.GONE);
-            if (response != null){
-                try {
-                    JSONObject jsonObject = new JSONObject(response.getResponseString());
-                    if (jsonObject.has("elections")) {
-                        electionDataArray = jsonObject.getJSONArray("elections");
-                        totalElectionValue.setText(String.valueOf(electionDataArray.length()));
-                    }else {
-                        Toast.makeText(HomeActivity.this, "Error fetching election data", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                Toast.makeText(HomeActivity.this, "Error fetching election data", Toast.LENGTH_SHORT).show();
             }
-        }
+
+            @Override
+            public void error(Exception e) {
+                Toast.makeText(HomeActivity.this, "Error Fetching Election Data", Toast.LENGTH_SHORT).show();
+            }
+        }, HomeActivity.this);
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
