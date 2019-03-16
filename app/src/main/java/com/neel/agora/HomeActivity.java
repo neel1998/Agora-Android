@@ -1,10 +1,7 @@
 package com.neel.agora;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,19 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.neel.agora.Election.ElectionData;
 import com.neel.agora.Election.ElectionDataAsyncTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.URL;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,8 +53,8 @@ public class HomeActivity extends AppCompatActivity
             public void success(int[] ints) {
                 homeProgressBar.setVisibility(View.GONE);
                 totalElectionValue.setText(String.valueOf(ints[0]));
-                activeElectionValue.setText(String.valueOf(ints[1]));
-                pendingElectionValue.setText(String.valueOf(ints[2]));
+                pendingElectionValue.setText(String.valueOf(ints[1]));
+                activeElectionValue.setText(String.valueOf(ints[2]));
                 finishedElectionValue.setText(String.valueOf(ints[3]));
 
             }

@@ -1,8 +1,15 @@
 package com.neel.agora.Election;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class ElectionData {
     public static String id;
@@ -28,8 +35,9 @@ public class ElectionData {
     public static JSONArray winners;
     public static Boolean isCounted;
     public static Integer noVacancies;
-
-
+    public static Boolean isActive = false;
+    public static Boolean isFinished = false;
+    public static Boolean isPending = false;
 
     public ElectionData(JSONObject jsonObject){
         try {
@@ -56,7 +64,34 @@ public class ElectionData {
             winners = jsonObject.getJSONArray("winners");
             isCounted = jsonObject.getBoolean("isCounted");
             noVacancies = jsonObject.getInt("noVacancies");
-        } catch (JSONException e) {
+
+            TimeZone tz = TimeZone.getTimeZone("Australia/Sydney");
+            Calendar startCal = Calendar.getInstance(tz);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            sdf.setCalendar(startCal);
+            startCal.setTime(sdf.parse(start));
+
+            Calendar endCal = Calendar.getInstance(tz);
+            sdf.setCalendar(endCal);
+            endCal.setTime(sdf.parse(end));
+
+            if (startCal.after(Calendar.getInstance(tz))) {
+                isPending = true;
+                isActive = false;
+                isFinished = false;
+            }
+            else if (endCal.before(Calendar.getInstance(tz))) {
+                isFinished = true;
+                isPending = false;
+                isActive = false;
+            }
+            else {
+                isActive = true;
+                isPending = false;
+                isFinished = false;
+            }
+
+        } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
     }

@@ -3,7 +3,6 @@ package com.neel.agora.Election;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.neel.agora.AsyncCallback;
 import com.neel.agora.Network;
@@ -18,10 +17,16 @@ import java.util.ArrayList;
 
 public class ElectionDataAsyncTask {
     private static Context mContext;
-    private static ArrayList<ElectionData> mElectionDataList;
+    private static ArrayList<ElectionData> mTotalElectionDataList;
+    private static ArrayList<ElectionData> mActiveElectionDataList;
+    private static ArrayList<ElectionData> mPendingElectionDataList;
+    private static ArrayList<ElectionData> mFinishedElectionDataList;
     public static void getElectionData(final AsyncCallback<int[]> callback, Context context){
         mContext = context;
-        mElectionDataList = new ArrayList<>();
+        mTotalElectionDataList = new ArrayList<>();
+        mActiveElectionDataList = new ArrayList<>();
+        mPendingElectionDataList = new ArrayList<>();
+        mFinishedElectionDataList = new ArrayList<>();
         ElectionTask electionTask = new ElectionTask(){
             @Override
             protected void onPostExecute(NetworkResponse response) {
@@ -31,9 +36,22 @@ public class ElectionDataAsyncTask {
                         if (jsonObject.has("elections")) {
                             JSONArray electionDataArray = jsonObject.getJSONArray("elections");
                             for (int i = 0; i < electionDataArray.length(); i ++){
-                                mElectionDataList.add(new ElectionData(electionDataArray.getJSONObject(i)));
+                                ElectionData data = new ElectionData(electionDataArray.getJSONObject(i));
+                                mTotalElectionDataList.add(data);
+                                if (data.isFinished) {
+                                   Log.d(data.name, "finished");
+                                   mFinishedElectionDataList.add(data);
+                                }
+                                if (data.isPending) {
+                                    Log.d(data.name, "pending");
+                                    mPendingElectionDataList.add(data);
+                                }
+                                if(data.isActive) {
+                                    Log.d(data.name, "active");
+                                    mActiveElectionDataList.add(data);
+                                }
                             }
-                            callback.success(new int[]{mElectionDataList.size(),0,0,0});
+                            callback.success(new int[]{mTotalElectionDataList.size(),mPendingElectionDataList.size(),mActiveElectionDataList.size(),mFinishedElectionDataList.size()});
                         }else {
                             callback.error(new IOException());
                         }
@@ -54,7 +72,19 @@ public class ElectionDataAsyncTask {
         }
     }
 
+    public static ArrayList<ElectionData> getActiveElectionDataList() {
+        return mActiveElectionDataList;
+    }
+
+    public static ArrayList<ElectionData> getPendingElectionDataList() {
+        return mPendingElectionDataList;
+    }
+
+    public static ArrayList<ElectionData> getFinishedElectionDataList() {
+        return mFinishedElectionDataList;
+    }
+
     public static ArrayList<ElectionData> getElectionDataList() {
-        return mElectionDataList;
+        return mTotalElectionDataList;
     }
 }
