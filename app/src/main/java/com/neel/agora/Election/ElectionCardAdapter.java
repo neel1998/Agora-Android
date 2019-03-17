@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.neel.agora.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -32,11 +34,22 @@ public class ElectionCardAdapter extends ArrayAdapter<ElectionData> {
         TextView statusTextview = electionView.findViewById(R.id.election_card_status_value);
         TextView candidateTextView = electionView.findViewById(R.id.election_card_candidates);
 
+        String candidatesString = "";
+        JSONArray candidatesArray = data.getCandidates();
+        for (int i = 0; i < candidatesArray.length(); i++) {
+            try {
+                candidatesString += candidatesArray.getString(i) + "\n";
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         titleTextview.setText("Election: " + data.getName());
         descriptionTextview.setText(data.getDescription());
         startTextview.setText(data.getStart());
         endTextview.setText(data.getEnd());
         statusTextview.setText(data.getStatus());
+        candidateTextView.setText(candidatesString);
         return electionView;
     }
 }

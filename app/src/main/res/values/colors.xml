@@ -10,4 +10,6 @@
     <color name="finished_elections">#02B5C8</color>
     <color name="about_background">#383838</color>
     <color name="election_card_color">#F80F24</color>
+    <color name="grey">#DDDDDD</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
