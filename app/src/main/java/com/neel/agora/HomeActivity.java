@@ -13,9 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.neel.agora.Election.ElectionDataAsyncTask;
 
 public class HomeActivity extends AppCompatActivity
@@ -24,6 +26,7 @@ public class HomeActivity extends AppCompatActivity
     ProgressBar homeProgressBar;
     TextView totalElectionValue, pendingElectionValue, activeElectionValue, finishedElectionValue;
     UserHelper mUserHelper;
+    RelativeLayout activeElectionsLayout, pendingElectionsLayout, totalElectionsLayout, finishedELectionsLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,57 @@ public class HomeActivity extends AppCompatActivity
         pendingElectionValue = findViewById(R.id.pending_election_value);
         finishedElectionValue = findViewById(R.id.finished_election_value);
 
+        activeElectionsLayout = findViewById(R.id.active_election_layout);
+        finishedELectionsLayout = findViewById(R.id.finished_election_layout);
+        pendingElectionsLayout = findViewById(R.id.pending_election_layout);
+        totalElectionsLayout = findViewById(R.id.total_election_layout);
+
+        activeElectionsLayout.setEnabled(false);
+        finishedELectionsLayout.setEnabled(false);
+        pendingElectionsLayout.setEnabled(false);
+        totalElectionsLayout.setEnabled(false);
+
+        activeElectionsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                String electionData = gson.toJson(ElectionDataAsyncTask.getActiveElectionDataList());
+                Intent intent = new Intent(HomeActivity.this, ElectionsActivity.class);
+                intent.putExtra("electionData", electionData);
+                startActivity(intent);
+            }
+        });
+        finishedELectionsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                String electionData = gson.toJson(ElectionDataAsyncTask.getFinishedElectionDataList());
+                Intent intent = new Intent(HomeActivity.this, ElectionsActivity.class);
+                intent.putExtra("electionData", electionData);
+                startActivity(intent);
+            }
+        });
+        pendingElectionsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                String electionData = gson.toJson(ElectionDataAsyncTask.getPendingElectionDataList());
+                Intent intent = new Intent(HomeActivity.this, ElectionsActivity.class);
+                intent.putExtra("electionData", electionData);
+                startActivity(intent);
+            }
+        });
+        totalElectionsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gson = new Gson();
+                String electionData = gson.toJson(ElectionDataAsyncTask.getTotalElectionDataList());
+                Intent intent = new Intent(HomeActivity.this, ElectionsActivity.class);
+                intent.putExtra("electionData", electionData);
+                startActivity(intent);
+            }
+        });
+
         mUserHelper = UserHelper.getUserHelper();
 
         ElectionDataAsyncTask.getElectionData(new AsyncCallback<int[]>() {
@@ -57,10 +111,18 @@ public class HomeActivity extends AppCompatActivity
                 activeElectionValue.setText(String.valueOf(ints[2]));
                 finishedElectionValue.setText(String.valueOf(ints[3]));
 
+                activeElectionsLayout.setEnabled(true);
+                finishedELectionsLayout.setEnabled(true);
+                pendingElectionsLayout.setEnabled(true);
+                totalElectionsLayout.setEnabled(true);
             }
 
             @Override
             public void error(Exception e) {
+                activeElectionsLayout.setEnabled(false);
+                finishedELectionsLayout.setEnabled(false);
+                pendingElectionsLayout.setEnabled(false);
+                totalElectionsLayout.setEnabled(false);
                 Toast.makeText(HomeActivity.this, "Error Fetching Election Data", Toast.LENGTH_SHORT).show();
             }
         }, HomeActivity.this);

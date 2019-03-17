@@ -38,16 +38,16 @@ public class ElectionDataAsyncTask {
                             for (int i = 0; i < electionDataArray.length(); i ++){
                                 ElectionData data = new ElectionData(electionDataArray.getJSONObject(i));
                                 mTotalElectionDataList.add(data);
-                                if (data.isFinished) {
-                                   Log.d(data.name, "finished");
+                                if (data.getIsFinished()) {
+                                   Log.d(data.getName(), "finished");
                                    mFinishedElectionDataList.add(data);
                                 }
-                                if (data.isPending) {
-                                    Log.d(data.name, "pending");
+                                if (data.getIsPending()) {
+                                    Log.d(data.getName(), "pending");
                                     mPendingElectionDataList.add(data);
                                 }
-                                if(data.isActive) {
-                                    Log.d(data.name, "active");
+                                if(data.getIsActive()) {
+                                    Log.d(data.getName(), "active");
                                     mActiveElectionDataList.add(data);
                                 }
                             }
@@ -84,7 +84,7 @@ public class ElectionDataAsyncTask {
         return mFinishedElectionDataList;
     }
 
-    public static ArrayList<ElectionData> getElectionDataList() {
+    public static ArrayList<ElectionData> getTotalElectionDataList() {
         return mTotalElectionDataList;
     }
 }
