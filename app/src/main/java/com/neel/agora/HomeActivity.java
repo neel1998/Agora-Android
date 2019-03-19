@@ -168,7 +168,8 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id){
-            case R.id.nav_elections:
+            case R.id.nav_create_elections:
+                startActivity(new Intent(HomeActivity.this, CreateElectionActivity.class));
                 break;
             case R.id.nav_profile:
                 break;

@@ -5,8 +5,8 @@
             android:id="@+id/nav_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_elections"
-            android:title="Elections" />
+            android:id="@+id/nav_create_elections"
+            android:title="Create elections" />
         <item
             android:id="@+id/nav_profile"
             android:title="Profile" />
