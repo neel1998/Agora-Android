@@ -43,7 +43,15 @@ public class ElectionCardAdapter extends ArrayAdapter<ElectionData> {
                 e.printStackTrace();
             }
         }
-
+        if (data.getIsActive()){
+            titleTextview.setBackgroundColor(parent.getResources().getColor(R.color.active_elections));
+        }
+        if (data.getIsPending()){
+            titleTextview.setBackgroundColor(parent.getResources().getColor(R.color.pending_elections));
+        }
+        if (data.getIsFinished()){
+            titleTextview.setBackgroundColor(parent.getResources().getColor(R.color.finished_elections));
+        }
         titleTextview.setText("Election: " + data.getName());
         descriptionTextview.setText(data.getDescription());
         startTextview.setText(data.getStart());

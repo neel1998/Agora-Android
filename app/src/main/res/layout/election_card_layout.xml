@@ -12,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/election_card_color"
-        android:textSize="28sp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:textAlignment="center"
         android:text="Election 01"
+        android:padding="10dp"
         />
     <TextView
         android:id="@+id/election_card_description_label"
