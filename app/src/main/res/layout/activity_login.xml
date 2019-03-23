@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_centerInParent="true"
-        android:background="@color/white"
+        android:background="@drawable/rounded_corner_bg"
         android:padding="30dp"
         >
     <android.support.v7.widget.AppCompatImageView
@@ -61,7 +61,7 @@
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@drawable/rounded_corner_accent_color_bg"
         android:text="Login"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"

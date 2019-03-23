@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="@color/white"
+    android:background="@drawable/rounded_corner_bg"
     >
 
     <TextView
         android:id="@+id/election_card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/election_card_color"
+        android:background="@drawable/rounded_corner_bg"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:textAlignment="center"

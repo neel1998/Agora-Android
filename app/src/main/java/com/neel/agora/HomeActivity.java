@@ -101,7 +101,17 @@ public class HomeActivity extends AppCompatActivity
         });
 
         mUserHelper = UserHelper.getUserHelper();
+//        addElectionData();
 
+    }
+
+    @Override
+    protected void onResume() {
+        addElectionData();
+        super.onResume();
+    }
+
+    private void addElectionData(){
         ElectionDataAsyncTask.getElectionData(new AsyncCallback<int[]>() {
             @Override
             public void success(int[] ints) {
@@ -127,7 +137,6 @@ public class HomeActivity extends AppCompatActivity
             }
         }, HomeActivity.this);
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

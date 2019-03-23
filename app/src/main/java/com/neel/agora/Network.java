@@ -94,7 +94,7 @@ public class Network {
                     }
                 }
             } catch (JSONException e) {
-                return false;
+//                return false;
             }
 
         }
