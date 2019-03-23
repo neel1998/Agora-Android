@@ -11,5 +11,6 @@
     <color name="about_background">#383838</color>
     <color name="election_card_color">#CC0215</color>
     <color name="grey">#DDDDDD</color>
+    <color name="facebook_color">#404F98</color>
     <color name="transparent">#00FFFFFF</color>
 </resources>

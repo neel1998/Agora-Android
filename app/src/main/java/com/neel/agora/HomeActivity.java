@@ -181,11 +181,10 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(new Intent(HomeActivity.this, CreateElectionActivity.class));
                 break;
             case R.id.nav_profile:
+                startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
                 break;
             case R.id.nav_about:
-                Log.d("navbar", "about selected");
-                Intent aboutIntent = new Intent(HomeActivity.this, AboutActivity.class);
-                startActivity(aboutIntent);
+                startActivity(new Intent(HomeActivity.this, AboutActivity.class));
                 break;
         }
 

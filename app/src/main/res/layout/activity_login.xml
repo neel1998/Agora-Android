@@ -67,12 +67,25 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/pswd_login_edittext"
         />
+        <Button
+            android:id="@+id/facebook_login_btn"
+            android:layout_below="@+id/login_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/rounded_corner_accent_color_bg"
+            android:text="Continue with Facebook"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/facebook_color"
+            />
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/signup_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/login_btn"
+        android:layout_below="@+id/facebook_login_btn"
         android:text="Don't Have an Account?"
         android:layout_marginTop="20dp"
         />
