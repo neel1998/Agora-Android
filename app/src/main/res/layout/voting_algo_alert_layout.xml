@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RadioGroup
+        android:id="@+id/voting_algo_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RadioButton
+            android:id="@+id/voting_algo_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oklahoma"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Range Voting"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ranked Pairs"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Satisfaction Approval Voting"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sequential Proportional Approval voting "
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SmithSet"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Approval"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exhaustive ballot"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Baldwin"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exhaustive ballot with dropoff "
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uncovered Set"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cope Land"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Minimax Condorcet"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Random Ballot"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Borda"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kemeny Young"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nanson"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Instant Round off 2-round"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+        <RadioButton
+            android:id="@+id/voting_algo_19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contingent Method"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            />
+    </RadioGroup>
+    </ScrollView>
+</RelativeLayout>
