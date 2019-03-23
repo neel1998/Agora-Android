@@ -5,21 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutActivity"
-    android:background="@color/about_background"
+    android:background="@color/colorPrimary"
+    android:padding="10dp"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_bg"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        >
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/agora"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/about_image"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/about_image"
-        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
         android:layout_marginTop="10dp"
@@ -28,15 +35,13 @@
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Agora vote is a voting platform where users can create elections and invite friends to cast their votes.
-
-It supports a wide range of voting algorithms some of which are Majority, Egalitarian, Australian STV just to name a few"
+        android:layout_height="wrap_content"
+        android:text="@string/about_text"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20dp"
         android:layout_below="@+id/about_title"
+        android:textSize="20sp"
         android:layout_marginTop="40dp"
         android:layout_margin="10dp"
         />
+    </RelativeLayout>
 </RelativeLayout>
