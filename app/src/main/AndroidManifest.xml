@@ -11,19 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateElectionActivity"></activity>
-        <activity android:name=".ElectionsActivity" />
-        <activity android:name=".AboutActivity" />
+        <activity android:name=".CreateElectionActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".ElectionsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AboutActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/LoginTheme">
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
